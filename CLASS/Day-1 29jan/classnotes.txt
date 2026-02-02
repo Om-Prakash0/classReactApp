@@ -1,0 +1,432 @@
+
+
+
+
+
+
+JavaScript Variable Scope: var, let, const
+Example Code
+{ var a = 10, b = 50 }
+console.log(a + b)   // Output: 60
+
+{ const a = 10, b = 50 }
+console.log(a + b)   // ReferenceError
+
+{ let a = 10, b = 50 }
+console.log(a + b)   // ReferenceError
+
+1️⃣ var
+
+var is function-scoped, not block-scoped.
+
+It ignores { } blocks.
+
+Variables declared with var can be accessed outside the block.
+
+✔️ Can be used outside { }
+❌ Not safe for block-level control
+
+2️⃣ const
+
+const is block-scoped.
+
+It is accessible only inside the block { } where it is declared.
+
+Value cannot be reassigned.
+
+❌ Cannot be accessed outside the block
+
+3️⃣ let
+
+let is block-scoped.
+
+It is accessible only inside the block { } where it is declared.
+
+Value can be reassigned.
+
+❌ Cannot be accessed outside the block
+
+📌 Summary
+
+var → Function scoped (not block scoped)
+
+let → Block scoped
+
+const → Block scoped + constant value
+
+🔍 One-Line Difference
+
+Use let and const for safer code.
+Avoid var due to scope issues.
+
+
+JavaScript: var, let, const (Mutability & Reassignment)
+Example Code
+const a = 10;
+a = 23;          // ❌ Error
+console.log(a);
+
+let b = 10;
+b = 8;           // ✅ Allowed
+console.log(b);
+
+var c = 5;
+c = 20;          // ✅ Allowed
+console.log(c);
+
+1️⃣ const
+
+Value cannot be reassigned.
+
+Must be initialized at declaration.
+
+Block-scoped.
+
+Reassignment throws TypeError.
+
+❌ Reassignment not allowed
+
+⚠️ const means constant reference, not always fully immutable.
+
+2️⃣ let
+
+Value can be reassigned.
+
+Used when the value needs to change.
+
+Block-scoped.
+
+✅ Reassignment allowed
+
+3️⃣ var
+
+Value can be reassigned.
+
+Function-scoped, not block-scoped.
+
+Can be accessed outside { } blocks.
+
+Hoisted and initialized as undefined.
+
+✅ Reassignment allowed
+⚠️ Not recommended in modern JavaScript
+
+
+
+JavaScript: Hoisting & Post Declaration (var, let, const)
+1️⃣ var (Hoisting Allowed)
+console.log(a);
+var a = 10;
+
+
+✔️ Output:
+
+undefined
+
+
+Explanation:
+
+var declarations are hoisted to the top.
+
+During hoisting, the variable is initialized as undefined.
+
+So accessing it before declaration does not throw an error.
+
+✅ Post declaration allowed
+⚠️ Value is undefined until assigned
+
+2️⃣ let (Post Declaration NOT Allowed)
+console.log(b);
+let b = 10;
+
+
+❌ Error:
+
+ReferenceError: Cannot access 'b' before initialization
+
+
+Explanation:
+
+let is hoisted but kept in the Temporal Dead Zone (TDZ).
+
+Cannot be accessed before declaration.
+
+❌ Post declaration not allowed
+
+3️⃣ const (Post Declaration NOT Allowed)
+console.log(c);
+const c = 13;
+
+
+❌ Error:
+
+ReferenceError: Cannot access 'c' before initialization
+
+
+Explanation:
+
+const is also hoisted but inside TDZ.
+
+Must be declared and initialized at the same time.
+
+❌ Post declaration not allowed
+
+⚠️ Incorrect Code (Assignment Before Declaration)
+console.log(c = 10);
+const c = 13;
+
+
+❌ Error:
+
+SyntaxError / ReferenceError
+
+
+Because const cannot be accessed or assigned before declaration.
+
+📌 Correct Notes (Important)
+// var → allows post declaration, gives undefined
+// let → does NOT allow post declaration (TDZ error)
+// const → does NOT allow post declaration (TDZ error)
+
+
+JavaScript Data Types & typeof Operator
+Example Code
+let a = 10;                 // number
+let b = "Ramesh";           // string
+let c = 35.4;               // number
+let d = [1, 2, 3, 4];       // object (array)
+let e = null;               // object (JS bug)
+let f;                      // undefined
+let g = { name: "om", age: 20 }; // object
+
+console.log(typeof a); // number
+console.log(typeof b); // string
+console.log(typeof c); // number
+console.log(typeof d); // object
+console.log(typeof e); // object
+console.log(typeof f); // undefined
+console.log(typeof g); // object
+
+📌 Explanation of typeof
+
+typeof is an operator in JavaScript.
+
+It returns the data type of a variable.
+
+Output is always a string.
+
+⚠️ Important Interview Points
+1️⃣ Arrays
+typeof []  // "object"
+
+
+👉 Arrays are a special type of object.
+
+2️⃣ null
+typeof null  // "object"
+
+
+👉 This is a known JavaScript bug (for backward compatibility).
+
+3️⃣ undefined
+typeof undefined  // "undefined"
+
+
+👉 Variable declared but not assigned any value.
+
+📊 Summary Table
+Value	Type
+10, 35.4	number
+"Ramesh"	string
+[]	object
+{}	object
+null	object
+undefined	undefined
+✅ Correct Note Line
+// typeof operator tells the type of data stored in a variable
+
+
+JavaScript Equality Operators: == vs ===
+Example Code
+console.log(5 == '5');    // true
+console.log(5 === '5');  // false
+
+1️⃣ == (Loose Equality Operator)
+
+Compares values only.
+
+Performs type conversion (type coercion) before comparison.
+
+5 == '5'     // true
+true == 1    // true
+null == undefined // true
+
+
+⚠️ Can give unexpected results.
+
+2️⃣ === (Strict Equality Operator)
+
+Compares both value and data type.
+
+No type conversion is performed.
+
+5 === '5'    // false
+true === 1   // false
+null === undefined // false
+
+
+✅ Safer and recommended.
+
+📌 Key Differences
+Operator	Compares	Type Conversion	Result Safety
+==	Value only	Yes	❌ Risky
+===	Value + Type	No	✅ Safe
+🔍 Interview Tip
+
+Always use === unless you explicitly want type coercion.
+
+✅ Correct Comment (Improved)
+// === is strict equality operator (checks value and data type)
+
+
+JavaScript Loops – Notes & Examples
+🔁 Types of Loops in JavaScript
+
+for loop → Used when the number of iterations is known (counting, arrays, indexes)
+
+while loop → Used when iterations depend on a condition
+
+do-while loop → Executes at least once, then checks condition
+
+forEach → Used to iterate over arrays (callback-based)
+
+1️⃣ for Loop
+console.log("For Loop");
+
+for (let i = 0; i < 10; i++) {
+    console.log(2 * i);
+}
+
+
+📌 Used when start, end, and increment are known.
+
+2️⃣ while Loop
+console.log("While Loop");
+
+let i = 10;
+while (i > 0) {
+    console.log(2 * i);
+    i--;
+}
+
+
+📌 Condition is checked before execution.
+
+3️⃣ do-while Loop
+console.log("Do-While Loop");
+
+i = 10;
+do {
+    console.log(3 * i);
+    i--;
+} while (i > 0);
+
+
+📌 Executes at least once, even if condition is false.
+
+4️⃣ forEach Loop (Array Method)
+console.log("Using forEach");
+
+let a = [1, 2, 3, 4, 5];
+a.forEach((item) => {
+    console.log(item);
+});
+
+
+📌 Used only with arrays
+📌 Cannot use break or continue
+
+⚠️ Important Corrections
+
+❌ Avoid using loop variables without declaration:
+
+for(i=0;i<10;i++) ❌
+
+
+✅ Always declare:
+
+for(let i=0;i<10;i++) ✅
+
+
+✅ One-Line Summary
+// for → known iterations
+// while → condition-based
+// do-while → runs at least once
+// forEach → array iteration
+
+
+
+JavaScript Functions
+📌 Definition
+// A function is a block of code that performs a specific task and can be reused multiple times without rewriting the code.
+
+1️⃣ Function Declaration
+function greet() {
+    console.log("Hello World");
+}
+greet(); // function call
+
+
+✔️ No parameters
+✔️ No return value
+
+2️⃣ Function with Parameters
+function add(a, b) {
+    console.log(a + b);
+}
+
+Function Call (Arguments)
+add(13, 10);
+add(5, 9);
+
+
+📌 a and b are parameters
+📌 13, 10 and 5, 9 are arguments
+
+⚠️ Avoid this:
+
+add(a = 13, b = 10); // ❌ not recommended
+
+3️⃣ Function with Return Value
+function add1(a, b) {
+    return a + b;
+}
+
+Using the Return Value
+console.log(add1(2, 4));
+
+let c = add1(2, 4);
+console.log(c);
+
+
+✔️ return sends the result back
+✔️ Function execution stops after return
+
+📌 Important Notes
+
+Code inside a function runs only when the function is called.
+
+A function can:
+
+take parameters
+
+return a value
+
+be reused multiple times
+
+🔍 Quick Summary
+// Function declaration → defines the function
+// Function call → executes the function
+// Parameters → values received
+// Arguments → values passed
+// return → sends value back

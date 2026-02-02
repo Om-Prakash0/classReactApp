@@ -1,0 +1,4 @@
+step1:- open terminal of vs code
+step 2:- run npx create-react-app day1 on vs code terminal
+step3:- cd day1 
+step4:- npm start
